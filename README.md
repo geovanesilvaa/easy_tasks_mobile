@@ -1,149 +1,151 @@
 # 📱 EasyTasks — Aplicativo Mobile de Lista de Tarefas
 
-O **EasyTasks** é um aplicativo mobile simples, rápido e intuitivo criado com **React Native**, focado em produtividade pessoal.  
+O **EasyTasks** é um aplicativo mobile simples, rápido e intuitivo criado com **React Native**, focado em produtividade pessoal.
 Permite **criar**, **listar**, **concluir** e **excluir** tarefas, mantendo tudo salvo localmente com **AsyncStorage**, garantindo que nenhuma tarefa seja perdida mesmo após fechar o app.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- 📝 **Adicionar tarefas** rapidamente
-- 📋 **Listar todas as tarefas** em ordem de criação
-- ✔️ **Marcar como concluída** (toggle com estilo visual)
-- 🗑️ **Excluir tarefas** com modal de confirmação
-- 💾 **Persistência local automática** com AsyncStorage
-- 🎨 Interface minimalista e responsiva
-- ⚡ Carregamento inicial com `ActivityIndicator`
-- 🧭 Navegação entre telas usando React Navigation
+* 📝 **Adicionar tarefas** rapidamente
+* 📋 **Listar todas as tarefas** em ordem de criação
+* ✔️ **Marcar como concluída** (toggle com estilo visual)
+* 🗑️ **Excluir tarefas** com modal de confirmação
+* 💾 **Persistência local automática** com AsyncStorage
+* 🎨 Interface minimalista e responsiva
+* ⚡ Carregamento inicial com `ActivityIndicator`
+* 🧭 Navegação entre telas usando React Navigation
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **React Native**
-- **React Navigation (Stack Navigator)**
-- **AsyncStorage**
-- **UUID (para gerar IDs de tarefas)**
-- **Vector Icons (Feather Icons)**
-- **JavaScript (ES2025)**
-- **StyleSheet + Flexbox**
-
+* **React Native**
+* **React Navigation (Stack Navigator)**
+* **AsyncStorage**
+* **UUID (para gerar IDs de tarefas)**
+* **Vector Icons (Feather Icons)**
+* **JavaScript (ES2025)**
+* **StyleSheet + Flexbox**
 
 ---
 
-## 📲 Instalação e Execução do Projeto
+## ▶️ Executar o Projeto
 
-### 🔧 1. Instalar dependências
+### 🔧 Instalar dependências
 
-```
+```bash
+# com npm
 npm install
-npm install @react-navigation/native
-npm install @react-navigation/native-stack
-npm install @react-native-async-storage/async-storage
-npm install react-native-vector-icons
-npm install react-native-uuid
+
+# com yarn
+yarn install
 ```
 
+---
 
+## 📱 Executar no Android
 
-⚠️ Caso esteja usando Android, não esqueça de rodar:
-npx react-native link react-native-vector-icons
-
-
-
-▶️ Executar o app no Android
+```bash
+# com npm
 npm run android
-Ou:
-npx react-native run-android
 
-▶️ Executar o app no iOS (macOS)
+# com yarn
+yarn android
+```
+
+---
+
+## 🍏 Executar no iOS (macOS)
+
+```bash
+# com npm
 npm run ios
 
+# com yarn
+yarn ios
+```
 
+---
 
+## 📌 Lógica Principal (Resumo Técnico)
 
-📌 Lógica Principal (Resumo Técnico)
 ✔️ Salvar tarefas
 
-Cada tarefa possui:
-
+```js
 {
   id: uuid.v4(),
   text: "Minha tarefa",
   status: false
 }
-
-
+```
 
 As tarefas são salvas via:
+
+```js
 await AsyncStorage.setItem('@tasks', JSON.stringify(newData));
+```
 
 ✔️ Carregar tarefas no início
+
+```js
 const stored = await AsyncStorage.getItem('@tasks');
 setData(JSON.parse(stored));
+```
 
 ✔️ Alternar concluída/não concluída
+
+```js
 status: !item.status
+```
 
 ✔️ Excluir tarefas
+
+```js
 const updated = data.filter(t => t.id !== id);
+```
 
+---
 
+## 🧩 Estrutura de Componentes
 
-🧩 Estrutura de Componentes
-Home
+### **Home**
 
-Tela de apresentação
+* Tela de apresentação
+* Botão de acesso para a lista de tarefas
 
-Botão de acesso para a lista de tarefas
+### **Sobre (Lista principal)**
 
-Sobre (Lista principal)
+* Input para adicionar
+* Botão para salvar
+* Lista renderizada com FlatList
+* Componente **TaskItem**
 
-Input para adicionar
+### **TaskItem**
 
-Botão para salvar
+* Ícone de check (toggle)
+* Texto da tarefa
+* Ícone de lixeira
+* Estilização condicional quando concluída
 
-Lista renderizada com FlatList
+---
 
-TaskItem componetizado
+## 🎨 Design / UX
 
-TaskItem
+* Paleta baseada em **Royal Blue (#4169e1)**
+* Tarefas concluídas ficam mais claras
+* Botões com boa área de toque
+* Ícones Feather integrados
+* Layout responsivo via Flexbox
 
-Ícone de check (toggle)
+---
 
-Texto da tarefa
+## 👨‍💻 Desenvolvimento
 
-Ícone de lixeira
+Este projeto foi desenvolvido por **Geovane Silva**, como prática e aplicação dos estudos em:
 
-Estilização condicional quando concluída
-
-
-
-🎨 Design / UX
-
-Paleta baseada em Royal Blue (#4169e1)
-
-Tarefas concluídas ficam mais claras
-
-Botões com boa área de toque
-
-Ícones Feather integrados
-
-Layout responsivo via Flexbox
-
-
-
-👨‍💻 Desenvolvimento
-
-Este projeto foi desenvolvido por Geovane Silva, como prática e aplicação dos estudos em:
-
-React Native
-
-Organização de projetos
-
-Gerenciamento de estado
-
-Persistência local
-
-Navegação mobile
-
+* React Native
+* Organização de projetos
+* Gerenciamento de estado
+* Persistência local
+* Navegação mobile
